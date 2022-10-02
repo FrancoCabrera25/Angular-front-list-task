@@ -1,4 +1,4 @@
-<ng-container *ngFor="let filter of listFilter | keyvalue">
+<ng-container *ngFor="let filter of listFilter | keyvalue | sortBy: 'value'">
 	<button
 		mat-button
 		class="option-filter"

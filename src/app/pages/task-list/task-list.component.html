@@ -1,15 +1,26 @@
 <h1>Task list</h1>
 <div class="container">
-	<div class="filter-container">
+	<div class="option-container" *ngIf="tasklist.length !== 0">
+		<div class="sort-container">
+			<mat-form-field appearance="fill" class="sort-option">
+				<mat-label>Ordenar por</mat-label>
+				<mat-select name="food" (selectionChange)="setSort($event)" [value]="sortSelected">
+					<mat-option *ngFor="let item of listSort | keyvalue" [value]="item.key">
+						{{ item.value }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
 		<app-task-filter
-			*ngIf="tasklist.length !== 0"
 			[listFilter]="listFilter"
 			(filterSelectedEvent)="searchTaskByFilter($event)"
 			[filterSelected]="filterSelected"
 		></app-task-filter>
 	</div>
 	<div class="list-container">
-		<ng-container *ngFor="let task of tasklist | customfilter: 'status':searchTaskbyFilter">
+		<ng-container
+			*ngFor="let task of tasklist | customfilter: 'status':searchTaskbyFilter | sortBy: sortSelected:sortOrderSelected"
+		>
 			<div class="list-item fadeIn">
 				<app-task-card
 					[task]="task"
@@ -20,9 +31,11 @@
 		</ng-container>
 	</div>
 	<ng-container *ngIf="tasklist.length === 0">
-		<h1 class="title-empty">Para comenzar Ingrese su primera tarea....</h1>
-		<div class="button-add-empty-container">
-			<button class="button-add-empty" mat-raised-button color="primary" (click)="addTask()">Nueva Tarea</button>
+		<div class="empty-container">
+			<h1 class="title-empty">Para comenzar Ingrese su primera tarea....</h1>
+			<div class="button-add-empty-container">
+				<button class="button-add-empty" mat-raised-button color="primary" (click)="addTask()">Nueva Tarea</button>
+			</div>
 		</div>
 	</ng-container>
 	<div class="button-add" *ngIf="tasklist.length !== 0">

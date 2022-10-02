@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSelectChange } from '@angular/material/select';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TaskService } from '../../core/services/task/task.service';
@@ -16,8 +17,11 @@ export class TaskListComponent implements OnInit, OnDestroy {
 	private destroy$: Subject<void> = new Subject<void>();
 	tasklist: ITask[] = [];
 	listFilter: Map<string, string> = new Map<string, string>();
+	listSort: Map<string, string> = new Map<string, string>();
 	filterSelected: string = 'ALL';
 	searchTaskbyFilter: string = '';
+	sortSelected: string = 'creationDate';
+	sortOrderSelected: 'desc' | 'asc' = 'desc';
 	dialogBoxSettings = {
 		width: '650px',
 		margin: '0 auto',
@@ -25,9 +29,10 @@ export class TaskListComponent implements OnInit, OnDestroy {
 		hasBackdrop: false,
 		data: null
 	};
+
 	constructor(public dialog: MatDialog, private taskService: TaskService) {}
 	ngOnInit(): void {
-		this.setFilters();
+		this.setFiltersAndSort();
 		this.loadTasks();
 	}
 	loadTasks(): void {
@@ -35,11 +40,14 @@ export class TaskListComponent implements OnInit, OnDestroy {
 			this.tasklist = tasks;
 		});
 	}
-	setFilters() {
+	setFiltersAndSort() {
 		this.listFilter.set('ALL', 'Todas');
 		this.listFilter.set(TaskStatusEnum.PENDING.toString(), 'Pendientes');
 		this.listFilter.set(TaskStatusEnum.DONE.toString(), 'Terminadas');
 		this.listFilter.set(TaskStatusEnum.PROGRESS.toString(), 'Progreso');
+
+		this.listSort.set('creationDate', 'Fecha creación');
+		this.listSort.set('title', 'Titulo');
 	}
 
 	searchTaskByFilter(value: string): void {
@@ -75,6 +83,11 @@ export class TaskListComponent implements OnInit, OnDestroy {
 					result.isEditing ? this.taskService.updateTask(result.task) : this.taskService.addTask(result.task);
 				}
 			});
+	}
+
+	setSort({ value }: MatSelectChange): void {
+		this.sortOrderSelected = value === 'title' ? 'asc' : 'desc';
+		this.sortSelected = value;
 	}
 
 	ngOnDestroy(): void {

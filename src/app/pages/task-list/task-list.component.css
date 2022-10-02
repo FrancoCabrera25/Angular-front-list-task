@@ -4,11 +4,19 @@
 	justify-content: center;
 }
 
-.filter-container {
+.option-container {
 	display: flex;
 	justify-content: center;
-	align-content: center;
+	align-items: center;
+	flex-direction: column;
 	margin-top: 25px;
+	padding: 5px;
+}
+.sort-container {
+	margin: 0 20px;
+}
+.sort-option {
+	width: 100%;
 }
 .list-container {
 	display: flex;
@@ -30,6 +38,13 @@
 	bottom: 0;
 	right: 0;
 	padding: 35px;
+}
+.empty-container {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	margin: 5rem;
 }
 .title-empty {
 	margin: 25px 0;
@@ -58,5 +73,12 @@
 @media only screen and (min-width: 768px) {
 	.list-item {
 		width: 30%;
+	}
+	.option-container {
+		flex-direction: row;
+	}
+	.sort-option {
+		width: 100%;
+		margin: 0;
 	}
 }
