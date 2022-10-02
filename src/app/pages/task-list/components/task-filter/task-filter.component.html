@@ -1,0 +1,10 @@
+<ng-container *ngFor="let filter of listFilter | keyvalue">
+	<button
+		mat-button
+		class="option-filter"
+		(click)="selected(filter.key)"
+		[ngClass]="filterSelected === filter.key ? 'option-filter-selected' : ''"
+	>
+		{{ filter.value }}
+	</button>
+</ng-container>

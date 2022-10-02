@@ -1,0 +1,10 @@
+.option-filter {
+	padding: 5px;
+	font-size: 13px;
+	min-width: 110px;
+	border-radius: 5px;
+}
+.option-filter-selected {
+	background-color: gray;
+	color: white;
+}

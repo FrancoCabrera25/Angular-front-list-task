@@ -1,0 +1,34 @@
+<h1>Task list</h1>
+<div class="container">
+	<div class="filter-container">
+		<app-task-filter
+			*ngIf="tasklist.length !== 0"
+			[listFilter]="listFilter"
+			(filterSelectedEvent)="searchTaskByFilter($event)"
+			[filterSelected]="filterSelected"
+		></app-task-filter>
+	</div>
+	<div class="list-container">
+		<ng-container *ngFor="let task of tasklist | customfilter: 'status':searchTaskbyFilter">
+			<div class="list-item fadeIn">
+				<app-task-card
+					[task]="task"
+					(updateTaskEvent)="updateTask(task)"
+					(deleteTaskEvent)="deleteTask(task.id)"
+				></app-task-card>
+			</div>
+		</ng-container>
+	</div>
+	<ng-container *ngIf="tasklist.length === 0">
+		<h1 class="title-empty">Para comenzar Ingrese su primera tarea....</h1>
+		<div class="button-add-empty-container">
+			<button class="button-add-empty" mat-raised-button color="primary" (click)="addTask()">Nueva Tarea</button>
+		</div>
+	</ng-container>
+	<div class="button-add" *ngIf="tasklist.length !== 0">
+		<button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="addTask()">
+			<!-- <mat-icon>delete</mat-icon> -->
+			<mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>
+		</button>
+	</div>
+</div>

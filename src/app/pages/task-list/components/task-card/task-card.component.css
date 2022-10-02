@@ -1,0 +1,69 @@
+.card-header-container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+.title-container {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+}
+.title {
+	text-transform: capitalize;
+	padding-left: 10px;
+	margin: 2px;
+	font-weight: 500;
+}
+.mat-card {
+	padding: 0 !important;
+}
+.task-content {
+	margin-top: 15px !important;
+	padding: 10px;
+}
+.subtitle-container {
+	margin: 15px 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+.badge {
+	padding: 8px;
+	border-radius: 15px;
+}
+.badge-low {
+	background-color: #0a47a9;
+	color: white;
+	font-size: 12px;
+}
+.badge-medium {
+	background-color: #b3bc6d;
+	color: white;
+}
+.badge-high {
+	background-color: #cd3d15;
+	color: white;
+}
+
+.actions {
+	padding: 10px !important;
+	margin: 10px !important;
+}
+
+.task-description {
+	margin-top: 16px;
+	padding: 10px;
+}
+
+.status-pending {
+	color: #cfcfcf;
+}
+
+.status-progress {
+	color: #039be5;
+}
+
+.status-done {
+	color: #94af76;
+}

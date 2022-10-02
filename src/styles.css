@@ -2,3 +2,32 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @-webkit-keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .fadeIn {
+  
+    animation-duration: 0.5s;
+    animation-fill-mode: none;
+    animation-name: fadeIn;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-fill-mode: none;
+    -webkit-animation-name: fadeIn;
+  }
+  

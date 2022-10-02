@@ -1,0 +1,54 @@
+<mat-card>
+	<div class="card-header-container">
+		<div class="title-container">
+			<mat-card-title class="title">{{ task.title }}</mat-card-title>
+			<span
+				class="badge"
+				[ngClass]="
+					task.priority === 'LOW'
+						? 'badge-low'
+						: task.priority === 'MEDIUM'
+						? 'badge-medium'
+						: task.priority === 'HIGH'
+						? 'badge-high'
+						: ''
+				"
+			>
+				Prioridad: {{ convertPriority(task.priority) }}</span
+			>
+		</div>
+	</div>
+	<mat-divider></mat-divider>
+	<mat-card-content>
+		<div class="task-content">
+			<div class="subtitle-container">
+				<span>
+					<strong> Estado: </strong>
+					<span
+						[ngClass]="
+							task.status === taskSatusEnum.PENDING
+								? 'status-pending'
+								: task.status === taskSatusEnum.PROGRESS
+								? 'status-progress'
+								: task.status === taskSatusEnum.DONE
+								? 'status-done'
+								: ''
+						"
+					>
+						{{ convertStatus(task.status) }}</span
+					>
+				</span>
+				<span> <strong>Fecha creación:</strong> {{ task.creationDate | date: 'dd/MM/yyyy HH:mm:ss' }}</span>
+				<span *ngIf="task.updateDate">
+					<strong> Fecha actualizacion:</strong> {{ task.updateDate | date: 'dd/MM/yyyy HH:mm:ss' }}</span
+				>
+			</div>
+			<mat-divider></mat-divider>
+			<p class="task-description">{{ task.description }}</p>
+		</div>
+	</mat-card-content>
+	<mat-card-actions class="actions">
+		<button mat-button (click)="updateTask()">Editar</button>
+		<button mat-button (click)="deleteTask()">Eliminar</button>
+	</mat-card-actions>
+</mat-card>
